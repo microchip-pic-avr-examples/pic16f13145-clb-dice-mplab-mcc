@@ -156,5 +156,5 @@ _start_clb_config:
     DW  0x0040
     DW  0x0000
     DW  0x3800
-    DW  0x0006
+    DW  0x0000
 _end_clb_config:
