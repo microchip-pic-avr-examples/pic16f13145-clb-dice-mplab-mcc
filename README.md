@@ -2,13 +2,13 @@
 
 [![MCHP](images/microchip.png)](https://www.microchip.com)
 
-# Software-less Electronic Dice with the PIC16F13145 
+# Zero-Software eDice with the CLB on the PIC16F13145 
 
-The Configurable Logic Block (CLB) inside the PIC16F13145 family of microcontrollers is an array of Look-Up Tables (LUTs) similar to that of a small Field Programmable Gate Array (FPGA). Using the CLB, it is possible to fully implement electronic dice in such a way that the CPU is 100% idle while doing performing this task. 
+The Configurable Logic Block (CLB) inside the PIC16F13145 family of microcontrollers (MCUs) is an array of Look-Up Tables (LUTs) similar to that of a small Field Programmable Gate Array (FPGA). Using the CLB, it is possible to implement electronic dice when the CPU is 100% idle while performing this task.  
 
 ## Caution
 
-This example contains blinking lights. If you are sensitive to flashing/blinking lights, excerise caution when viewing. 
+This example contains blinking lights. If you are sensitive to flashing/blinking lights, exercise caution when viewing. 
 
 ## Related Documentation
 
@@ -17,8 +17,8 @@ This example contains blinking lights. If you are sensitive to flashing/blinking
 
 ## Software Used
 - [MPLAB® X IDE 6.15.0 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_PIC16F13145&utm_content=pic16f13145-clb-dice-mplab-mcc-github&utm_bu=MCU08)
-- [MPLAB XC8 2.46.0 or newer compiler](https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_PIC16F13145&utm_content=pic16f13145-clb-dice-mplab-mcc-github&utm_bu=MCU08)
-- [MPLAB Code Configurator](https://www.microchip.com/en-us/tools-resources/configure/mplab-code-configurator?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_PIC16F13145&utm_content=pic16f13145-clb-dice-mplab-mcc-github&utm_bu=MCU08)
+- [MPLAB XC8 2.46.0 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_PIC16F13145&utm_content=pic16f13145-clb-dice-mplab-mcc-github&utm_bu=MCU08)
+- [MPLAB Code Configurator (MCC)](https://www.microchip.com/en-us/tools-resources/configure/mplab-code-configurator?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_PIC16F13145&utm_content=pic16f13145-clb-dice-mplab-mcc-github&utm_bu=MCU08)
 - PIC16F1xxxx_DFP v1.24.387
 
 ## Hardware Used
@@ -26,11 +26,11 @@ This example contains blinking lights. If you are sensitive to flashing/blinking
 - [PIC16F13145 Curioisty Nano Evaluation Kit (EV06M52A)](https://www.microchip.com/en-us/development-tool/EV06M52A?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_PIC16F13145&utm_content=pic16f13145-clb-dice-mplab-mcc-github&utm_bu=MCU08)
 - 7 LEDs
 - 7 Resistors for the LEDs (rec. 2.7 k&Omega;)  
-      - Adjusting the resistor value will change the brightness of the LED
+      - Adjusting the resistor value will change the LED's brightness
 
 ## Setup
 
-1. Build 7 copies of the following circuit on a breadboard. For ease of wiring, the circuits can be placed in parallel, rather than building it like the pip pattern shown in step 2.
+1. Build seven copies of the following circuit on a breadboard. For ease of wiring, the circuits can be placed in parallel, rather than building it like the dice dot (also known as a pip) pattern shown in step 2.
 
 ![LED Circuit](./images/circuit.png)  
 
@@ -49,7 +49,7 @@ This example contains blinking lights. If you are sensitive to flashing/blinking
 | RC0 | Pip 7
 | GND | GND
 
-3. Plug in the Curiosity Nano.
+3. Plug-in the Curiosity Nano.
 4. Open MPLAB X IDE.
 5. Open the project folder and press the Program button.  
 
@@ -75,17 +75,21 @@ This example contains blinking lights. If you are sensitive to flashing/blinking
 
 ## Theory of Operation
 
+The CLB is a LUT... To configure it, use the CLB Synthesizer tool inside of MCC (or the equivalant [standalone online tool](#)). Logic diagrams are screenshots of the tool. All of the configuration files (.clb and .v) are included in the example folders. 
+
 ![CLB Diagram](./images/CLBStructure.PNG)
 
-There are 3 main function blocks in this program - an input handler, a free-running counter for number generation, and a series of LUTs for the display outputs. The CLB clock source is from TMR2.
+There are three main function blocks in this program - an input handler, a free-running counter for number generation, and a series of LUTs for the display outputs. The CLB clock source is from TMR2.
 
-### Input
+### Input Handler
 
-The input is composed of 2 main elements - an input debouncer and a one-shot generator. When SW0 is pressed, a series of small "bounces" occur before the value stabilizes. To avoid instability due to this behavior, the CLB logic implements a small input debouncer out of two D-Flip Flops, an inverter, and an AND gate, as shown in the image below.
+The input is composed of two sections - an input debouncer and a one-shot generator. When SW0 is pressed, a series of small "bounces" occur before the value stabilizes. To avoid instability due to this behavior, the CLB logic implements a small input debouncer out of two D-Flip Flops, an inverter, and an AND gate, as shown in the image below.
 
 ![Debouncer](./images/debouncing.PNG)  
 
-Then, a one-shot pulse generator is implemented to enable/disable the output Flip-Flops for each LED when the button is pressed. The one-shot works by only emitting a pulse when the debouncer output in the previous clock cycle is not equal to current output of the debouncer, and the current signal is 1 (pressed). Then, the one-shot generates a pulse that causes the JK Flip-Flop to toggle on the next clock cycle. At this point, the one-shot output will become 0 as the previous and current values match. 
+Then, a one-shot pulse generator is implemented to enable/disable the output Flip-Flops when the user presses a button. If the one-shot was removed, the dice would roll while the user held the button.
+
+The one-shot works emits a pulse when the debouncer output in the previous clock cycle is not equal to current output of the debouncer, and the current signal is 1 (pressed). Then, the one-shot generates a pulse that causes the JK Flip-Flop to toggle on the next clock cycle. At this point, the one-shot output will become 0 as the previous and current values match. 
 
 ![One-Shot](./images/oneShot.PNG)  
 
@@ -93,7 +97,7 @@ The state of the outputs is shown on LED0 on the Curiosity Nano. If the LED is O
 
 ### Counter
 
-The counter module is resposible for the "rolling" of the dice. On every edge of the CLB clock, it counts up until it reaches 5. When the value 5 is reached, the next clock cycle will reset it to 0. This behavior is implemented in the Verilog module below. 
+The counter module is resposible for the "rolling" of the dice. On every edge of the CLB clock, it counts up until it reaches five. When the value five is reached, the next clock cycle will reset it to 0. This behavior is implemented in the Verilog module below. 
 
 **Note**: The counter changes quickly, creating the illusion of randomness. 
 
@@ -109,7 +113,7 @@ module Counter(CLK, out0, out1, out2);
 
     always @(posedge CLK) 
     begin
-      if (out == 5)
+      if (out >= 5)
         out <= 0;
       else 
          out <= out + 1;
@@ -120,7 +124,7 @@ endmodule
 
 ### Output
 
-To generate the outputs for the pips (LEDs), a LUT is used on each output. To determine the values in the LUT, go through the list of possible input values and determine for each pip if it should be ON (1) or OFF (0). Since the timer starts at 0, the outputs are all offset by 1 (in other words an input of 0 is a dice roll of 1).
+To generate the outputs for the pips (LEDs), a LUT is used on each output. To determine the values in the LUT, go through the list of possible input values and determine for each pip if it should be ON (`1`) or OFF (`0`). Since the timer starts at 0, all outputs are offset by 1, which means that an input of 0 is a dice roll of 1.
 
 A copy of the LUTs is shown below. 
 
@@ -158,4 +162,4 @@ Faster periods will be more harder to predict, while slower periods are easier. 
 
 ## Summary
 
-This example has shown how the CLB can operate independently of the CPU. After initialization of the peripherals, the CPU is fully idle and able to do any other task in the microcontroller.
+This example has shown how the CLB can operate independently of the CPU. After initialization of the peripherals, the CPU is fully idle and able to do any other task in the MCU.
