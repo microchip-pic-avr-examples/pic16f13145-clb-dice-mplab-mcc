@@ -5,9 +5,9 @@
         "metaDataVersion": "1.3.0",
         "name": "com.microchip.mcu8.mplabx.project.pic16f13145-clb-dice-mplab-mcc",
         "version": "1.0.0",
-        "displayName": "Software-less Electronic Dice with the PIC16F13145",
+        "displayName": "Zero-Software eDice with the CLB on the PIC16F13145",
         "projectName": "pic16f13145-clb-dice-mplab-mcc",
-        "shortDescription": "Implement electronic dice using the CLB on the PIC16F13145 family of microcontrollers.",
+        "shortDescription": "Implement electronic dice using the CLB on the PIC16F13145 family of microcontrollers while the CPU is idle.",
         "ide": {
             "name": "MPLAB X",
             "semverRange": ">=6.20.0"

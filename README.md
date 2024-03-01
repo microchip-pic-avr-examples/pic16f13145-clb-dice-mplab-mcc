@@ -6,9 +6,11 @@
 
 The Configurable Logic Block (CLB) inside the PIC16F13145 family of microcontrollers (MCUs) is an array of Look-Up Tables (LUTs) similar to that of a small Field Programmable Gate Array (FPGA). Using the CLB, it is possible to implement electronic dice when the CPU is 100% idle while performing this task.  
 
+![Dice Image](./images/diceStatic.JPG)  
+
 ## Caution
 
-This example contains blinking lights. If you are sensitive to flashing/blinking lights, exercise caution when viewing. 
+This example contains blinking lights. If you are sensitive to flashing/blinking lights, exercise caution when viewing or recreating. 
 
 ## Related Documentation
 
@@ -19,7 +21,7 @@ This example contains blinking lights. If you are sensitive to flashing/blinking
 - [MPLAB® X IDE 6.15.0 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_PIC16F13145&utm_content=pic16f13145-clb-dice-mplab-mcc-github&utm_bu=MCU08)
 - [MPLAB XC8 2.46.0 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_PIC16F13145&utm_content=pic16f13145-clb-dice-mplab-mcc-github&utm_bu=MCU08)
 - [MPLAB Code Configurator (MCC)](https://www.microchip.com/en-us/tools-resources/configure/mplab-code-configurator?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_PIC16F13145&utm_content=pic16f13145-clb-dice-mplab-mcc-github&utm_bu=MCU08)
-- PIC16F1xxxx_DFP v1.24.387
+- PIC16F1xxxx_DFP v1.24.387  
 
 ## Hardware Used
 
@@ -40,8 +42,8 @@ This example contains blinking lights. If you are sensitive to flashing/blinking
 
 | I/O Pin | Function |
 | ------- | -------- |
-| RA6 | Pip 1
-| RA7 | Pip 2
+| RC6 | Pip 1
+| RC7 | Pip 2
 | RB7 | Pip 3
 | RB5 | Pip 4
 | RA2 | Pip 5
@@ -61,8 +63,8 @@ This example contains blinking lights. If you are sensitive to flashing/blinking
 
 | I/O Pin | Function |
 | ------- | -------- |
-| RA6 | Pip 1
-| RA7 | Pip 2
+| RC6 | Pip 1
+| RC7 | Pip 2
 | RB7 | Pip 3
 | RB5 | Pip 4
 | RA2 | Pip 5
@@ -75,7 +77,7 @@ This example contains blinking lights. If you are sensitive to flashing/blinking
 
 ## Theory of Operation
 
-The CLB is a LUT... To configure it, use the CLB Synthesizer tool inside of MCC (or the equivalant [standalone online tool](#)). Logic diagrams are screenshots of the tool. All of the configuration files (.clb and .v) are included in the example folders. 
+The CLB is a LUT... To configure it, use the CLB Synthesizer tool inside of MCC (or the equivalant [standalone online tool](https://logic.microchip.com/clbsynthesizer/)). Logic diagrams are screenshots of the tool. All of the configuration files (.clb and .v) are included in the example folders. 
 
 ![CLB Diagram](./images/CLBStructure.PNG)
 
@@ -145,6 +147,8 @@ A copy of the LUTs is shown below.
 Then, a D Flip-Flop with Enable is used to hold the value when the user is not rolling the dice. The enable signal comes from the output of the JK Flip-Flop in the Input block.
 
 ## Operation
+
+![Dice GIF](./images/diceGIF.gif)  
 
 To start "rolling" the dice, press and hold SW0 until the LEDs start blinking. This allows the LED outputs (Pips) to change state. In this mode, the LEDs will blink quickly as the timer value is constantly increasing. 
 
