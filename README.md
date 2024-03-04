@@ -77,7 +77,7 @@ This example contains blinking lights. If you are sensitive to flashing/blinking
 
 ## Theory of Operation
 
-The CLB is a LUT... To configure it, use the CLB Synthesizer tool inside of MCC (or the equivalant [standalone online tool](https://logic.microchip.com/clbsynthesizer/)). Logic diagrams are screenshots of the tool. All of the configuration files (.clb and .v) are included in the example folders. 
+The CLB is a series of LUTs, similiar to an FPGA. In the PIC16F13145 family of MCUs, there are 32 LUTs available. To configure the logic, use the CLB Synthesizer tool inside of MCC (or the equivalant [standalone online tool](https://logic.microchip.com/clbsynthesizer/)). Logic diagrams are screenshots of the tool. All of the configuration files (.clb and .v) are included in the example folders. 
 
 ![CLB Diagram](./images/CLBStructure.PNG)
 
