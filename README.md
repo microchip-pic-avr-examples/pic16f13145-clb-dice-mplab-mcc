@@ -8,7 +8,7 @@ The Configurable Logic Block (CLB) inside the PIC16F13145 family of microcontrol
 
 ![Dice Image](./images/diceStatic.JPG)  
 
-## Caution
+## Caution  
 
 This example contains blinking lights. If you are sensitive to flashing/blinking lights, exercise caution when viewing or recreating. 
 
