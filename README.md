@@ -4,7 +4,7 @@
 
 # Zero-Software eDice with the CLB on the PIC16F13145 
 
-The Configurable Logic Block (CLB) inside the PIC16F13145 family of microcontrollers (MCUs) is an array of Look-Up Tables (LUTs) similar to that of a small Field Programmable Gate Array (FPGA). Using the CLB, it is possible to implement electronic dice when the CPU is 100% idle while performing this task.  
+The Configurable Logic Block (CLB) inside the PIC16F13145 family of microcontrollers (MCUs) is an array of Look-Up Tables (LUTs) similar to that of a small Field Programmable Gate Array (FPGA). With the CLB, the software complexity associated with implementing an electronic die is significantly reduced. Since MPLAB&reg; Code Configurator (MCC) is used to generate the APIs and initialization code, there are zero changes required to the microcontroller's program.  
 
 ![Dice Image](./images/diceStatic.JPG)  
 
@@ -18,7 +18,7 @@ This example contains blinking lights. If you are sensitive to flashing/blinking
 - [PIC16F13145 Device Page](https://www.microchip.com/en-us/product/PIC16F13145?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_PIC16F13145&utm_content=pic16f13145-clb-dice-mplab-mcc-github&utm_bu=MCU08)
 
 ## Software Used
-- [MPLAB® X IDE 6.15.0 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_PIC16F13145&utm_content=pic16f13145-clb-dice-mplab-mcc-github&utm_bu=MCU08)
+- [MPLAB X IDE 6.15.0 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_PIC16F13145&utm_content=pic16f13145-clb-dice-mplab-mcc-github&utm_bu=MCU08)
 - [MPLAB XC8 2.46.0 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_PIC16F13145&utm_content=pic16f13145-clb-dice-mplab-mcc-github&utm_bu=MCU08)
 - [MPLAB Code Configurator (MCC)](https://www.microchip.com/en-us/tools-resources/configure/mplab-code-configurator?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_PIC16F13145&utm_content=pic16f13145-clb-dice-mplab-mcc-github&utm_bu=MCU08)
 - PIC16F1xxxx_DFP v1.24.387  
@@ -40,7 +40,7 @@ This example contains blinking lights. If you are sensitive to flashing/blinking
 
 ![Display Diagram](./images/wiringDiagram.png)  
 
-| I/O Pin | Function |
+| I/O Pin | Connection |
 | ------- | -------- |
 | RC6 | Pip 1
 | RC7 | Pip 2
@@ -74,6 +74,10 @@ This example contains blinking lights. If you are sensitive to flashing/blinking
 | RC3 | SW0 (START/STOP)
 | RA3 | ~MCLR
 | GND | GND
+
+## Comparison to Software
+
+The CLB significantly reduces the software overhead associated with implementing this example. In software, the CPU would have to get a periodic interrupt, increment a counter, perform counter logic, map the counter output to the I/O pins and then return to its previous task. With the CLB, all of the functions associated with this example are handled by the hardware, which leaves the CPU free to do other tasks without interruption. 
 
 ## Theory of Operation
 
@@ -158,7 +162,7 @@ To stop "rolling" the dice, press and hold SW0 until the LEDs stop changing. Thi
 
 ## Changing the roll rate
 
-To change the rate the dice rolls at, adjust the period of TMR2 in MCC, press the generate button on the top left window, and reprogram. The default period is 80 ms. 
+To change the rate the dice rolls at, adjust the period of TMR2 in MCC, press the generate button on the top left window, and reprogram. The default period is 20 ms. 
 
 ![Timer 2 Period](./images/TMR2.PNG)  
 
