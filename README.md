@@ -6,7 +6,7 @@
 
 The Configurable Logic Block (CLB) inside the PIC16F13145 family of microcontrollers (MCUs) is an array of Look-Up Tables (LUTs) similar to that of a small Field Programmable Gate Array (FPGA). With the CLB, the software complexity associated with implementing an electronic die is significantly reduced. Since MPLAB&reg; Code Configurator (MCC) is used to generate the APIs and initialization code, there are zero changes required to the microcontroller's program.  
 
-![Dice Image](./images/diceStatic.JPG)  
+![Dice Image](./images/diceGIF.gif)  
 
 ## Caution  
 
