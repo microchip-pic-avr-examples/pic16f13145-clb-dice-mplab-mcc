@@ -21,7 +21,7 @@ This example contains blinking lights. If you are sensitive to flashing/blinking
 - [MPLAB X IDE 6.15.0 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_PIC16F13145&utm_content=pic16f13145-clb-dice-mplab-mcc-github&utm_bu=MCU08)
 - [MPLAB XC8 2.46.0 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_PIC16F13145&utm_content=pic16f13145-clb-dice-mplab-mcc-github&utm_bu=MCU08)
 - [MPLAB Code Configurator (MCC)](https://www.microchip.com/en-us/tools-resources/configure/mplab-code-configurator?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_PIC16F13145&utm_content=pic16f13145-clb-dice-mplab-mcc-github&utm_bu=MCU08)
-- PIC16F1xxxx_DFP v1.24.387  
+- PIC16F1xxxx_DFP v1.25.389  
 
 ## Hardware Used
 
