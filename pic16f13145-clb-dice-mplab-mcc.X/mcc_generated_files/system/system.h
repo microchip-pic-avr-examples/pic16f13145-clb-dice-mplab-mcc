@@ -9,7 +9,7 @@
  *
  * @version Driver Version 2.0.3
  *
- * @version Package Version 4.1.3
+ * @version Package Version 4.1.4
 */
 
 /*
@@ -40,13 +40,13 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "config_bits.h"
-#include "../system/clock.h"
 #include "../clb/clb1.h"
 #include "../system/pins.h"
 #include "../crc/crc.h"
 #include "../nvm/nvm.h"
 #include "../timer/tmr2.h"
 #include "../system/interrupt.h"
+#include "../system/clock.h"
 
 /**
  * @ingroup systemdriver
